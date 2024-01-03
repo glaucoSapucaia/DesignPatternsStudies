@@ -25,7 +25,7 @@ class Motorcycle(Vehicle):
 
 class VehicleFactory:
     @staticmethod
-    def getVehicle(type_vehicle: str) -> Vehicle:
+    def getVehicle(type_vehicle: str) -> Vehicle | None:
         if type_vehicle == 'lux':
             return CarLux()
         if type_vehicle == 'pop':
@@ -41,4 +41,4 @@ if __name__ == '__main__':
 
     for i in range(10):
         car = VehicleFactory.getVehicle(choice(available_cars))
-        car.goToTheCustomer()
+        car.goToTheCustomer()  # type: ignore

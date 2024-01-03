@@ -35,7 +35,7 @@ class VehicleFactory(ABC):
 
 class NorthZoneVehicleFactory(VehicleFactory):
     @staticmethod
-    def getVehicle(type_vehicle: str) -> Vehicle:
+    def getVehicle(type_vehicle: str) -> Vehicle | None:
         if type_vehicle == 'lux':
             return CarLux()
         if type_vehicle == 'pop':
@@ -47,7 +47,7 @@ class NorthZoneVehicleFactory(VehicleFactory):
 
 class SouthZoneVehicleFactory(VehicleFactory):
     @staticmethod
-    def getVehicle(type_vehicle: str) -> Vehicle:
+    def getVehicle(type_vehicle: str) -> Vehicle | None:
         if type_vehicle == 'lux':
             return CarLux()
         if type_vehicle == 'pop':

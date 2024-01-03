@@ -1,6 +1,7 @@
 # Returns an instance of the factory to the client
 
 from abc import ABC, abstractmethod
+from tkinter import NO
 
 
 class Vehicle(ABC):
@@ -28,7 +29,7 @@ class VehicleFactory:
         self.vehicle = self.getVehicle(type_vehicle)
 
     @staticmethod
-    def getVehicle(type_vehicle: str) -> Vehicle:
+    def getVehicle(type_vehicle: str) -> Vehicle | None:
         if type_vehicle == 'lux':
             return CarLux()
         if type_vehicle == 'pop':
@@ -37,8 +38,8 @@ class VehicleFactory:
             return Motorcycle()
         assert 0, "Unknown vehicle"
 
-    def goToTheCustomer(self):
-        self.vehicle.goToTheCustomer()
+    def goTo(self):
+        self.vehicle.goToTheCustomer()  # type: ignore
 
 
 if __name__ == '__main__':
@@ -47,4 +48,4 @@ if __name__ == '__main__':
 
     for i in range(10):
         car = VehicleFactory(choice(available_cars))
-        car.goToTheCustomer()
+        car.goTo()
