@@ -4,24 +4,27 @@ from typing import List
 
 
 class Colleague(ABC):
-    '''Abstract Colleague'''
+    """Abstract Colleague"""
 
     def __init__(self, name: str, mediator: IMediator) -> None:
         self.name = name
         self.mediator = mediator
 
     @abstractmethod
-    def direct(self, msg: str) -> None: pass
+    def direct(self, msg: str) -> None:
+        pass
 
     @abstractmethod
-    def broadcast(self, msg: str) -> None: pass
+    def broadcast(self, msg: str) -> None:
+        pass
 
     @abstractmethod
-    def sendDirect(self, receiver: Colleague, msg: str) -> None: pass
+    def sendDirect(self, receiver: Colleague, msg: str) -> None:
+        pass
 
 
 class Person(Colleague):
-    '''Concrete Colleague'''
+    """Concrete Colleague"""
 
     def direct(self, msg: str) -> None:
         print(msg)
@@ -34,18 +37,19 @@ class Person(Colleague):
 
 
 class IMediator(ABC):
-    '''Interface Mediator'''
+    """Interface Mediator"""
 
     @abstractmethod
-    def direct(self, sender: Colleague,
-               receiver: str, msg: str) -> None: pass
+    def direct(self, sender: Colleague, receiver: str, msg: str) -> None:
+        pass
 
     @abstractmethod
-    def broadcast(self, colleague: Colleague, msg: str) -> None: pass
+    def broadcast(self, colleague: Colleague, msg: str) -> None:
+        pass
 
 
 class ChatRoomMediator(IMediator):
-    '''Concrete Mediator'''
+    """Concrete Mediator"""
 
     def __init__(self) -> None:
         self.colleagues: List[Colleague] = []
@@ -66,38 +70,35 @@ class ChatRoomMediator(IMediator):
         self.colleagues.remove(colleague)
 
     def direct(self, sender: Colleague, receiver: str, msg: str) -> None:
-        '''Direct Concrete Method'''
+        """Direct Concrete Method"""
 
         if not self.isColleague(sender):
             return
 
         receiver_obj: List[Colleague] = [
-            colleague for colleague in self.colleagues
-            if colleague.name == receiver
+            colleague for colleague in self.colleagues if colleague.name == receiver
         ]
 
         if not receiver_obj:
             return
 
-        receiver_obj[0].direct(
-            f'{sender.name} to {receiver_obj[0].name} | {msg=}'
-        )
+        receiver_obj[0].direct(f"{sender.name} to {receiver_obj[0].name} | {msg=}")
 
     def broadcast(self, colleague: Colleague, msg: str) -> None:
-        '''Broadcast Concrete Method'''
+        """Broadcast Concrete Method"""
 
         if not self.isColleague(colleague):
             return
-        print(f'{colleague.name} | {msg=}')
+        print(f"{colleague.name} | {msg=}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # instances
     mediator = ChatRoomMediator()
-    person1 = Person('Maria', mediator)
-    person2 = Person('Luiz', mediator)
-    person3 = Person('Fernanda', mediator)
-    person4 = Person('Carlos', mediator)
+    person1 = Person("Maria", mediator)
+    person2 = Person("Luiz", mediator)
+    person3 = Person("Fernanda", mediator)
+    person4 = Person("Carlos", mediator)
 
     # add persons
     mediator.addColleague(person1)
@@ -106,13 +107,13 @@ if __name__ == '__main__':
     mediator.addColleague(person4)
 
     # executions
-    person1.broadcast('Alguém por ai?')
-    person2.broadcast('To aqui!')
+    person1.broadcast("Alguém por ai?")
+    person2.broadcast("To aqui!")
 
-    print('_' * 100)
+    print("_" * 100)
 
-    mediator.direct(person3, 'Luiz', 'Blza Luiz?!')
-    person4.sendDirect('Maria', 'Boa noite!')
+    mediator.direct(person3, "Luiz", "Blza Luiz?!")
+    person4.sendDirect("Maria", "Boa noite!")
 
     # non-existent person
-    person3.sendDirect('Tião', 'Bom dia!')
+    person3.sendDirect("Tião", "Bom dia!")

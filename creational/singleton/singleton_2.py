@@ -8,13 +8,13 @@ class AppSettings:
 
     # problems when using initializer methods with singleton
     def __init__(self) -> None:
-        self.tema = 'Escuro'
-        self.font = '20px'
+        self.tema = "Escuro"
+        self.font = "20px"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     as1 = AppSettings()
-    as1.tema = 'claro'
+    as1.tema = "claro"
 
     print(as1.tema)
 

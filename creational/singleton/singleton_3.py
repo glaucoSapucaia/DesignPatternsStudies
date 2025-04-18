@@ -35,17 +35,17 @@ class Singleton(type):
 
 class AppSettings(metaclass=Singleton):
     def __init__(self):
-        self.tema = 'escuro'
-        self.font = '40px'
+        self.tema = "escuro"
+        self.font = "40px"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     as1 = AppSettings()
     as2 = AppSettings()
     as3 = AppSettings()
 
     print(as1.tema)
-    as1.tema = 'claro'
+    as1.tema = "claro"
 
     # equal objects have equal attrs
 

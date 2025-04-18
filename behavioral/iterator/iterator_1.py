@@ -3,7 +3,7 @@ from typing import List, Any
 
 
 class MyIterator(Iterator):
-    '''Iterator Class'''
+    """Iterator Class"""
 
     def __init__(self, collection: List[Any]) -> None:
         self._collection = collection
@@ -19,7 +19,7 @@ class MyIterator(Iterator):
 
 
 class MyReverseIterator(Iterator):
-    '''Iterator Class'''
+    """Iterator Class"""
 
     def __init__(self, collection: List[Any]) -> None:
         self._collection = collection
@@ -35,7 +35,7 @@ class MyReverseIterator(Iterator):
 
 
 class MyCollection(Iterable):
-    '''Aggregate Class'''
+    """Aggregate Class"""
 
     def __init__(self) -> None:
         self._items: List[Any] = []
@@ -52,10 +52,10 @@ class MyCollection(Iterable):
         self._items.append(value)
 
     def __str__(self) -> str:
-        return f'{self.__class__.__name__}({self._items})'
+        return f"{self.__class__.__name__}({self._items})"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # instances
     my_collection = MyCollection()
 
@@ -71,6 +71,6 @@ if __name__ == '__main__':
 
     for i in my_collection:
         print(i)
-    print('_' * 100)
+    print("_" * 100)
     for i in my_collection.reverseIterator():
         print(i)

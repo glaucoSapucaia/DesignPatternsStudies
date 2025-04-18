@@ -18,12 +18,15 @@ class Order:
 
 # abstract strategy
 
+
 class DiscountStrategy(ABC):
     @abstractmethod
-    def calculate(self, value: float) -> float: pass
+    def calculate(self, value: float) -> float:
+        pass
 
 
 # strategies
+
 
 class TwentyPercent(DiscountStrategy):
     def calculate(self, value: float) -> float:
@@ -42,6 +45,7 @@ class NoDiscount(DiscountStrategy):
 
 # custom seller discount
 
+
 class CustomDiscount(DiscountStrategy):
     def __init__(self, discount: int) -> None:
         self.discount = discount / 100
@@ -50,7 +54,7 @@ class CustomDiscount(DiscountStrategy):
         return value - (value * self.discount)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     twenty_percent = TwentyPercent()
     fifty_percent = FiftyPercent()
     no_discount = NoDiscount()

@@ -1,4 +1,4 @@
-'''Using Observer example to façade pattern'''
+"""Using Observer example to façade pattern"""
 
 from __future__ import annotations
 from abc import ABC, abstractmethod
@@ -6,24 +6,28 @@ from typing import Any, List, Dict
 
 
 class IObservable(ABC):
-    '''Observable Interface'''
+    """Observable Interface"""
 
     @property
     @abstractmethod
-    def state(self) -> Dict: pass
+    def state(self) -> Dict:
+        pass
 
     @abstractmethod
-    def addObserver(self, observer: IObserver) -> None: pass
+    def addObserver(self, observer: IObserver) -> None:
+        pass
 
     @abstractmethod
-    def removeObserver(self, observer: IObserver) -> None: pass
+    def removeObserver(self, observer: IObserver) -> None:
+        pass
 
     @abstractmethod
-    def notifyObservers(self) -> None: pass
+    def notifyObservers(self) -> None:
+        pass
 
 
 class WeatherStation(IObservable):
-    '''Concrete Observable'''
+    """Concrete Observable"""
 
     def __init__(self) -> None:
         self._observers: List[IObserver] = []
@@ -61,14 +65,15 @@ class WeatherStation(IObservable):
 
 
 class IObserver(ABC):
-    '''Observer Interface'''
+    """Observer Interface"""
 
     @abstractmethod
-    def update(self) -> None: pass
+    def update(self) -> None:
+        pass
 
 
 class SmartPhone(IObserver):
-    '''Concrete Observer'''
+    """Concrete Observer"""
 
     def __init__(self, name: str, observable: IObservable) -> None:
         self.name = name
@@ -77,14 +82,14 @@ class SmartPhone(IObserver):
     def update(self) -> None:
         observable_name = self.observable.__class__.__name__
         print(
-            f'{self.name} | O objeto {observable_name} '
-            f'acaba de ser atualizado -> '
-            f'{self.observable.state}'
+            f"{self.name} | O objeto {observable_name} "
+            f"acaba de ser atualizado -> "
+            f"{self.observable.state}"
         )
 
 
 class NoteBook(IObserver):
-    '''Concrete Observer'''
+    """Concrete Observer"""
 
     def __init__(self, name: str, observable: IObservable) -> None:
         self.name = name
@@ -95,9 +100,9 @@ class NoteBook(IObserver):
     def show(self) -> None:
         observable_name = self.observable.__class__.__name__
         print(
-            f'{self.name} | O objeto {observable_name} '
-            f'acaba de ser atualizado -> '
-            f'{self.observable.state}'
+            f"{self.name} | O objeto {observable_name} "
+            f"acaba de ser atualizado -> "
+            f"{self.observable.state}"
         )
 
     def update(self) -> None:
@@ -105,15 +110,15 @@ class NoteBook(IObserver):
 
 
 class WeatherStationFacade:
-    '''Façade Class'''
+    """Façade Class"""
 
     def __init__(self) -> None:
         # observer tests
         self.weather_station = WeatherStation()
-        self.smartphone_1 = SmartPhone('Samsung', self.weather_station)
-        self.smartphone_2 = SmartPhone('Motorola', self.weather_station)
-        self.smartphone_3 = SmartPhone('IPhone', self.weather_station)
-        self.notebook_1 = NoteBook('Sony', self.weather_station)
+        self.smartphone_1 = SmartPhone("Samsung", self.weather_station)
+        self.smartphone_2 = SmartPhone("Motorola", self.weather_station)
+        self.smartphone_3 = SmartPhone("IPhone", self.weather_station)
+        self.notebook_1 = NoteBook("Sony", self.weather_station)
 
         # set observers states
         self.weather_station.addObserver(self.smartphone_1)
@@ -122,37 +127,37 @@ class WeatherStationFacade:
         self.weather_station.addObserver(self.notebook_1)
 
     def addObserverWithFacade(self, observer: IObserver) -> None:
-        '''Optional add oberver method'''
+        """Optional add oberver method"""
 
         self.weather_station.addObserver(observer)
 
     def removeObserverWithFacade(self, observer: IObserver) -> None:
-        '''Optional remove oberver method'''
+        """Optional remove oberver method"""
 
         self.weather_station.removeObserver(observer)
 
     def changeState(self, state: Dict[str, Any]) -> None:
-        '''Optional change state method'''
+        """Optional change state method"""
 
         self.weather_station.state = state
 
     def removeSmartphone1(self) -> None:
-        '''Remove specific Oberver'''
+        """Remove specific Oberver"""
 
         self.weather_station.removeObserver(self.smartphone_1)
 
     def removeNotebook1(self) -> None:
-        '''Remove specific Oberver'''
+        """Remove specific Oberver"""
 
         self.weather_station.removeObserver(self.notebook_1)
 
     def resetStateFacade(self) -> None:
-        '''Optional reset state method'''
+        """Optional reset state method"""
 
         self.weather_station.resetState()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # instances
     weather_station = WeatherStationFacade()
 
@@ -161,6 +166,6 @@ if __name__ == '__main__':
     weather_station.removeNotebook1()
     weather_station.resetStateFacade()
 
-    weather_station.changeState({'temperature': '27C°'})
-    weather_station.changeState({'wind_speed': '36km/h'})
-    weather_station.changeState({'air_humidity': '40%'})
+    weather_station.changeState({"temperature": "27C°"})
+    weather_station.changeState({"wind_speed": "36km/h"})
+    weather_station.changeState({"air_humidity": "40%"})

@@ -8,76 +8,75 @@ from dataclasses import dataclass
 
 @dataclass
 class Ingredient:
-    '''Abstract Ingredient'''
+    """Abstract Ingredient"""
 
     price: float
 
 
 @dataclass
 class Bread(Ingredient):
-    '''Concrete Ingredient'''
+    """Concrete Ingredient"""
 
     price: float = 1.50
 
 
 @dataclass
 class Sausage(Ingredient):
-    '''Concrete Ingredient'''
+    """Concrete Ingredient"""
 
     price: float = 4.99
 
 
 @dataclass
 class Bacon(Ingredient):
-    '''Concrete Ingredient'''
+    """Concrete Ingredient"""
 
     price: float = 7.99
 
 
 @dataclass
 class Egg(Ingredient):
-    '''Concrete Ingredient'''
+    """Concrete Ingredient"""
 
     price: float = 1.50
 
 
 @dataclass
 class PotatoStick(Ingredient):
-    '''Concrete Ingredient'''
+    """Concrete Ingredient"""
 
     price: float = 0.99
 
 
 @dataclass
 class MashedPotatoes(Ingredient):
-    '''Concrete Ingredient'''
+    """Concrete Ingredient"""
 
     price: float = 2.25
 
 
 @dataclass
 class Cheese(Ingredient):
-    '''Concrete Ingredient'''
+    """Concrete Ingredient"""
 
     price: float = 6.35
+
 
 # components
 
 
 class Hotdog:
-    '''Component Class
+    """Component Class
 
     "Fake Interface"
-    '''
+    """
 
     _name: str
     _ingredients: List[Ingredient]
 
     @property
     def price(self) -> float:
-        return round(sum(
-            [ingredient.price for ingredient in self._ingredients]
-        ), 2)
+        return round(sum([ingredient.price for ingredient in self._ingredients]), 2)
 
     @property
     def name(self) -> str:
@@ -90,25 +89,22 @@ class Hotdog:
     # __str__ and __repr__ methods
 
     def __str__(self) -> str:
-        return f'{self.name}({self.price} => {self.ingradients})'
+        return f"{self.name}({self.price} => {self.ingradients})"
 
     def __repr__(self) -> str:
         return self.__str__()
 
 
 class SimpleHotdog(Hotdog):
-    '''Sub Component Class'''
+    """Sub Component Class"""
 
     def __init__(self) -> None:
         self._name: str = self.__class__.__name__
-        self._ingredients: List[Ingredient] = [
-            Bread(),
-            Sausage()
-        ]
+        self._ingredients: List[Ingredient] = [Bread(), Sausage()]
 
 
 class SpecialHotdog(Hotdog):
-    '''Sub Component Class'''
+    """Sub Component Class"""
 
     def __init__(self) -> None:
         self._name: str = self.__class__.__name__
@@ -122,14 +118,15 @@ class SpecialHotdog(Hotdog):
             MashedPotatoes(),
         ]
 
+
 # decorators
 
 
 class CustomHotdog(Hotdog):
-    '''Decorator Dynamic Class
+    """Decorator Dynamic Class
 
     Use to prevent "CLASS EXPLOSION"
-    '''
+    """
 
     def __init__(self, hotdog: Hotdog, ingredient: Ingredient) -> None:
         self.hotdog = hotdog
@@ -139,10 +136,10 @@ class CustomHotdog(Hotdog):
 
     @property
     def name(self) -> str:
-        return f'{self.hotdog.name} + {self._ingredient.__class__.__name__}'
+        return f"{self.hotdog.name} + {self._ingredient.__class__.__name__}"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # instances
     simple_hotdog = SimpleHotdog()
     egg = Egg()
@@ -155,9 +152,9 @@ if __name__ == '__main__':
 
     # executions
     print(simple_hotdog)
-    print('_' * 100)
+    print("_" * 100)
     print(custom_simple_hotdog)
-    print('_' * 100)
+    print("_" * 100)
     print(custom_simple_hotdog2)
-    print('_' * 100)
+    print("_" * 100)
     print(custom_simple_hotdog3)

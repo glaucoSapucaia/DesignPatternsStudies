@@ -3,12 +3,14 @@ from abc import ABC, abstractmethod
 
 class VehicleLux(ABC):
     @abstractmethod
-    def goToTheCustomer(self) -> None: pass
+    def goToTheCustomer(self) -> None:
+        pass
 
 
 class VehiclePop(ABC):
     @abstractmethod
-    def goToTheCustomer(self) -> None: pass
+    def goToTheCustomer(self) -> None:
+        pass
 
 
 # North Zone classes
@@ -16,34 +18,36 @@ class VehiclePop(ABC):
 
 class VehicleLuxNZ(VehicleLux):
     def goToTheCustomer(self) -> None:
-        print('Looking for the customer | CarLux | North Zone')
+        print("Looking for the customer | CarLux | North Zone")
 
 
 class VehiclePopNZ(VehiclePop):
     def goToTheCustomer(self) -> None:
-        print('Looking for the customer | CarPop | North Zone')
+        print("Looking for the customer | CarPop | North Zone")
 
 
 class MotorcycleNZ(VehiclePop):
     def goToTheCustomer(self) -> None:
-        print('looking for the customer | Motorcycle | North Zone')
+        print("looking for the customer | Motorcycle | North Zone")
+
 
 # South Zone classes
 
 
 class VehicleLuxSZ(VehicleLux):
     def goToTheCustomer(self) -> None:
-        print('Looking for the customer | CarLux | South Zone')
+        print("Looking for the customer | CarLux | South Zone")
 
 
 class VehiclePopSZ(VehiclePop):
     def goToTheCustomer(self) -> None:
-        print('Looking for the customer | CarPop | South Zone')
+        print("Looking for the customer | CarPop | South Zone")
 
 
 class MotorcycleSZ(VehiclePop):
     def goToTheCustomer(self) -> None:
-        print('looking for the customer | Motorcycle | South Zone')
+        print("looking for the customer | Motorcycle | South Zone")
+
 
 # Abstract factory
 
@@ -52,15 +56,19 @@ class VehicleFactory(ABC):
 
     @staticmethod
     @abstractmethod
-    def getVehicleLux() -> VehicleLux: pass
+    def getVehicleLux() -> VehicleLux:
+        pass
 
     @staticmethod
     @abstractmethod
-    def getVehiclePop() -> VehiclePop: pass
+    def getVehiclePop() -> VehiclePop:
+        pass
 
     @staticmethod
     @abstractmethod
-    def getMotorcycle() -> VehiclePop: pass
+    def getMotorcycle() -> VehiclePop:
+        pass
+
 
 # Region factories
 
@@ -106,6 +114,6 @@ class CLient:
             motorcycle.goToTheCustomer()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     client = CLient()
     client.searchCustomer()

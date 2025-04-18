@@ -3,20 +3,23 @@ from abc import ABC, abstractmethod
 
 
 class IRemoteControl(ABC):
-    '''Interface Abstraction'''
+    """Interface Abstraction"""
 
     @abstractmethod
-    def increaseVolume(self) -> None: pass
+    def increaseVolume(self) -> None:
+        pass
 
     @abstractmethod
-    def decreaseVolume(self) -> None: pass
+    def decreaseVolume(self) -> None:
+        pass
 
     @abstractmethod
-    def power(self) -> None: pass
+    def power(self) -> None:
+        pass
 
 
 class RemoteControl(IRemoteControl):
-    '''Interface Abstraction'''
+    """Interface Abstraction"""
 
     def __init__(self, device: IDevice) -> None:
         self._device = device
@@ -32,27 +35,31 @@ class RemoteControl(IRemoteControl):
 
 
 class IDevice(ABC):
-    '''Implementor Interface'''
+    """Implementor Interface"""
 
     @property
     @abstractmethod
-    def volume(self) -> int: pass
+    def volume(self) -> int:
+        pass
 
     @volume.setter
     @abstractmethod
-    def volume(self, volume: int) -> None: pass
+    def volume(self, volume: int) -> None:
+        pass
 
     @property
     @abstractmethod
-    def power(self) -> bool: pass
+    def power(self) -> bool:
+        pass
 
     @power.setter
     @abstractmethod
-    def power(self, state: bool) -> None: pass
+    def power(self, state: bool) -> None:
+        pass
 
 
 class TvSystem(IDevice):
-    '''Concrete Implementor'''
+    """Concrete Implementor"""
 
     def __init__(self) -> None:
         self._volume = 10
@@ -66,19 +73,19 @@ class TvSystem(IDevice):
     @volume.setter
     def volume(self, volume: int) -> None:
         if not self._state:
-            print('Please, turn TV on!')
+            print("Please, turn TV on!")
             return
 
         if volume > 100:
-            print('Max Volume!')
+            print("Max Volume!")
             return
 
         if volume < 0:
-            print('Mute volume!')
+            print("Mute volume!")
             return
 
         self._volume = volume
-        print(f'Volume set => {self._volume}')
+        print(f"Volume set => {self._volume}")
 
     @property
     def power(self) -> bool:
@@ -87,10 +94,10 @@ class TvSystem(IDevice):
     @power.setter
     def power(self, state: bool) -> None:
         self._state = state
-        print(f'TV on?! => {self._state}')
+        print(f"TV on?! => {self._state}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # instances
     tv = TvSystem()
     controler = RemoteControl(tv)

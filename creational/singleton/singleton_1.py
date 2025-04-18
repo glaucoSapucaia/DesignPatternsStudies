@@ -8,30 +8,31 @@ def singleton(the_class):
 
     return getClass
 
+
 # O decorador singleton faz com que o __init__ seja chamado apenas uma vez
 
 
 @singleton
 class AppSettings:
     def __init__(self) -> None:
-        self.tema = 'Escuro'
+        self.tema = "Escuro"
 
 
 @singleton
 class Test:
     def __init__(self) -> None:
-        self.nome = 'test'
+        self.nome = "test"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     as1 = AppSettings()
     print(as1.tema)
     as2 = AppSettings()
-    as2.tema = 'claro'
+    as2.tema = "claro"
     print(as1.tema)
 
     t1 = Test()
     print(t1.nome)
     t2 = Test()
-    t2.nome = 'TEST'
+    t2.nome = "TEST"
     print(t1.nome)

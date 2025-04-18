@@ -4,24 +4,28 @@ from typing import List, Dict
 
 
 class IObservable(ABC):
-    '''Observable Interface'''
+    """Observable Interface"""
 
     @property
     @abstractmethod
-    def state(self) -> Dict: pass
+    def state(self) -> Dict:
+        pass
 
     @abstractmethod
-    def addObserver(self, observer: IObserver) -> None: pass
+    def addObserver(self, observer: IObserver) -> None:
+        pass
 
     @abstractmethod
-    def removeObserver(self, observer: IObserver) -> None: pass
+    def removeObserver(self, observer: IObserver) -> None:
+        pass
 
     @abstractmethod
-    def notifyObservers(self) -> None: pass
+    def notifyObservers(self) -> None:
+        pass
 
 
 class WeatherStation(IObservable):
-    '''Concrete Observable'''
+    """Concrete Observable"""
 
     def __init__(self) -> None:
         self._observers: List[IObserver] = []
@@ -59,14 +63,15 @@ class WeatherStation(IObservable):
 
 
 class IObserver(ABC):
-    '''Observer Interface'''
+    """Observer Interface"""
 
     @abstractmethod
-    def update(self) -> None: pass
+    def update(self) -> None:
+        pass
 
 
 class SmartPhone(IObserver):
-    '''Concrete Observer'''
+    """Concrete Observer"""
 
     def __init__(self, name: str, observable: IObservable) -> None:
         self.name = name
@@ -75,14 +80,14 @@ class SmartPhone(IObserver):
     def update(self) -> None:
         observable_name = self.observable.__class__.__name__
         print(
-            f'{self.name} | O objeto {observable_name} '
-            f'acaba de ser atualizado -> '
-            f'{self.observable.state}'
+            f"{self.name} | O objeto {observable_name} "
+            f"acaba de ser atualizado -> "
+            f"{self.observable.state}"
         )
 
 
 class NoteBook(IObserver):
-    '''Concrete Observer'''
+    """Concrete Observer"""
 
     def __init__(self, name: str, observable: IObservable) -> None:
         self.name = name
@@ -93,37 +98,37 @@ class NoteBook(IObserver):
     def show(self) -> None:
         observable_name = self.observable.__class__.__name__
         print(
-            f'{self.name} | O objeto {observable_name} '
-            f'acaba de ser atualizado -> '
-            f'{self.observable.state}'
+            f"{self.name} | O objeto {observable_name} "
+            f"acaba de ser atualizado -> "
+            f"{self.observable.state}"
         )
 
     def update(self) -> None:
         self.show()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # observer tests
 
     weather_station = WeatherStation()
-    smartphone_1 = SmartPhone('Samsung', weather_station)
-    smartphone_2 = SmartPhone('Motorola', weather_station)
-    smartphone_3 = SmartPhone('IPhone', weather_station)
+    smartphone_1 = SmartPhone("Samsung", weather_station)
+    smartphone_2 = SmartPhone("Motorola", weather_station)
+    smartphone_3 = SmartPhone("IPhone", weather_station)
 
-    notebook_1 = NoteBook('Sony', weather_station)
+    notebook_1 = NoteBook("Sony", weather_station)
 
     # set observers states
     weather_station.addObserver(smartphone_1)
     weather_station.addObserver(smartphone_2)
     weather_station.addObserver(smartphone_3)
 
-    weather_station.state = {'temperature': '34C°'}
-    weather_station.state = {'temperature': '30C°'}
-    weather_station.state = {'wind_speed': '40km/h'}
-    weather_station.state = {'air_humidity': '45%'}
+    weather_station.state = {"temperature": "34C°"}
+    weather_station.state = {"temperature": "30C°"}
+    weather_station.state = {"wind_speed": "40km/h"}
+    weather_station.state = {"air_humidity": "45%"}
 
     weather_station.removeObserver(smartphone_1)
     weather_station.resetState()
 
     weather_station.addObserver(notebook_1)
-    weather_station.state = {'climate': 'heavy_rain'}
+    weather_station.state = {"climate": "heavy_rain"}

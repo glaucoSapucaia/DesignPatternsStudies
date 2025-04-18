@@ -1,4 +1,4 @@
-'''Care with copies of objects
+"""Care with copies of objects
 
 immutable data !! are copied !!
 
@@ -17,7 +17,7 @@ mutable data !! are not copied !!
     dict
     class (can be changed)
 
-'''
+"""
 
 # use __future__ to fix fake importations errors
 
@@ -29,10 +29,8 @@ from copy import deepcopy
 
 class StringReprMixin:
     def __str__(self) -> str:
-        params = ', '.join(
-            [f'{k}={v}' for k, v in self.__dict__.items()]
-        )
-        return f'{self.__class__.__name__}({params})'
+        params = ", ".join([f"{k}={v}" for k, v in self.__dict__.items()])
+        return f"{self.__class__.__name__}({params})"
 
     def __repr__(self) -> str:
         return self.__str__()
@@ -59,9 +57,9 @@ class Address(StringReprMixin):
         self.number = number
 
 
-if __name__ == '__main__':
-    glauco = Person('glauco', 'sapucaia')
-    endereco_glauco = Address('rua jacui', '233A')
+if __name__ == "__main__":
+    glauco = Person("glauco", "sapucaia")
+    endereco_glauco = Address("rua jacui", "233A")
     glauco.addAddress(endereco_glauco)
 
     # here, i need to create a deepcopy object
@@ -69,7 +67,7 @@ if __name__ == '__main__':
     # (--- they have the same reference in memory ---)
 
     esposa_glauco = glauco.clone()
-    esposa_glauco.firstname = 'Gabriela'
+    esposa_glauco.firstname = "Gabriela"
 
     print(glauco)
     print(esposa_glauco)

@@ -1,11 +1,10 @@
 # mixin for __str__ and __repr__ methods
 
+
 class StringReprMixin:
     def __str__(self) -> str:
-        params = ', '.join([
-            f'{k} = {v}' for k, v in self.__dict__.items()
-        ])
-        return f'{self.__class__.__name__}({params})'
+        params = ", ".join([f"{k} = {v}" for k, v in self.__dict__.items()])
+        return f"{self.__class__.__name__}({params})"
 
     def __repr__(self) -> str:
         return self.__str__()
@@ -25,9 +24,9 @@ class MonostateSimple(StringReprMixin):
             self.sobrenome = sobrenome
 
 
-if __name__ == '__main__':
-    ms1 = MonostateSimple(nome='Glauco')
-    ms2 = MonostateSimple(sobrenome='Sapucaia')
+if __name__ == "__main__":
+    ms1 = MonostateSimple(nome="Glauco")
+    ms2 = MonostateSimple(sobrenome="Sapucaia")
 
     # both instances have the same attrs
 

@@ -1,7 +1,7 @@
-'''COMPOSITE
+"""COMPOSITE
 
 Application only hierarchical structures (trees)
-'''
+"""
 
 from __future__ import annotations
 from abc import ABC, abstractmethod
@@ -9,35 +9,37 @@ from typing import List
 
 
 class IComponent(ABC):
-    '''Component Abstract CLass'''
+    """Component Abstract CLass"""
 
     @abstractmethod
-    def printContent(self) -> None: pass
+    def printContent(self) -> None:
+        pass
 
     @abstractmethod
-    def getPrice(self) -> float: pass
+    def getPrice(self) -> float:
+        pass
 
-    def add(self, child: IComponent) -> None: pass
+    def add(self, child: IComponent) -> None:
+        pass
 
-    def remove(self, child: IComponent) -> None: pass
+    def remove(self, child: IComponent) -> None:
+        pass
 
 
 class Component(IComponent):
-    '''Composite Class'''
+    """Composite Class"""
 
     def __init__(self, name: str) -> None:
         self.name = name
         self._children: List[IComponent] = []
 
     def printContent(self) -> None:
-        print(f'\n{self.name}\n')
+        print(f"\n{self.name}\n")
         for child in self._children:
             child.printContent()
 
     def getPrice(self) -> float:
-        return sum(
-            [child.getPrice() for child in self._children]
-        )
+        return sum([child.getPrice() for child in self._children])
 
     def add(self, child: IComponent) -> None:
         self._children.append(child)
@@ -48,33 +50,33 @@ class Component(IComponent):
 
 
 class Product(IComponent):
-    '''Leaf Class'''
+    """Leaf Class"""
 
     def __init__(self, name: str, price: float) -> None:
         self.name = name
         self.price = price
 
     def printContent(self) -> None:
-        print(f'{self.name} -> {self.price}')
+        print(f"{self.name} -> {self.price}")
 
     def getPrice(self) -> float:
         return self.price
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # instances
     # leaf
-    t_shirt1 = Product('t_shirt1', 29.90)
-    t_shirt2 = Product('t_shirt2', 19.90)
-    t_shirt3 = Product('t_shirt3', 9.90)
+    t_shirt1 = Product("t_shirt1", 29.90)
+    t_shirt2 = Product("t_shirt2", 19.90)
+    t_shirt3 = Product("t_shirt3", 9.90)
 
-    smartphone1 = Product('smartphone1', 1000.45)
-    smartphone2 = Product('smartphone2', 1400.45)
+    smartphone1 = Product("smartphone1", 1000.45)
+    smartphone2 = Product("smartphone2", 1400.45)
 
     # composite
-    t_shirt_box = Component('t_shirt_box')
-    smartphone_box = Component('smartphone_box')
-    client_box = Component('client_box')
+    t_shirt_box = Component("t_shirt_box")
+    smartphone_box = Component("smartphone_box")
+    client_box = Component("client_box")
 
     # relations
     t_shirt_box.add(t_shirt1)
@@ -89,8 +91,8 @@ if __name__ == '__main__':
 
     # executions
     t_shirt_box.printContent()
-    print('_' * 100)
+    print("_" * 100)
     smartphone_box.printContent()
-    print('_' * 100)
+    print("_" * 100)
     client_box.printContent()
     print(client_box.getPrice())
